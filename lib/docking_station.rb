@@ -10,6 +10,7 @@ class DockingStation
   end
 
   def dock_bike(bike)
+    raise StandardError.new "Docking Station Full" unless @bike.nil? == true
     @bike = bike
   end
 

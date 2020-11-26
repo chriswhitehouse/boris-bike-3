@@ -4,6 +4,7 @@ describe DockingStation do
 
   let(:docking_station) {described_class.new}
   let(:bike) {Bike.new}
+  let(:bike2) {Bike.new}
 
   it 'responds to bike method' do
     is_expected.to respond_to(:bike)
@@ -36,6 +37,11 @@ describe DockingStation do
     it 'allows user to see bike' do
       docking_station.dock_bike(bike)
       expect(docking_station.bike).to eq bike
+    end
+
+    it 'gives an error when a bike is already docked' do
+      docking_station.dock_bike(bike)
+      expect { docking_station.dock_bike(bike2) }.to raise_error "Docking Station Full"
     end
   end
 
