@@ -8,15 +8,24 @@ class DockingStation
   end
 
   def release_bike
-    raise StandardError.new "no bikes left" unless @stored_bikes.empty? == false
+    raise StandardError.new "no bikes left" unless empty?(@stored_bikes) == false
     #alternatively fail "no bikes available" ...
     @stored_bikes.pop
   end
 
   def dock(bike)
-    raise StandardError.new "Docking Station Full" unless @stored_bikes.count < 20
+    raise StandardError.new "Docking Station Full" unless full?(@stored_bikes) == false
     @stored_bikes << bike
     @stored_bikes[0]
   end
 
-end
+  private
+
+  def full?(array)
+    array.count >= 20
+  end
+
+  def empty?(array)
+    array.count <= 0
+  end
+end 

@@ -47,4 +47,25 @@ describe DockingStation do
     end
   end
 
-end
+  # describe 'full?' do
+  #    it 'returns false if the station is not full' do 
+  #     stored_bikes = []
+  #     expect(docking_station.full?(stored_bikes)).to eq false
+  #    end 
+  #    it 'returns true if the station is full' do
+  #     stored_bikes = (1..20).to_a 
+  #     expect(docking_station.full?(stored_bikes)).to eq true
+  #    end
+  # end
+
+  # describe 'empty?' do
+  #   it 'returns true if there are no bikes' do
+  #     stored_bikes = []
+  #     expect(docking_station.empty?(stored_bikes)).to eq true
+  #   end 
+  #   it 'returns false if there are some bikes' do
+  #     stored_bikes = [1]
+  #     expect(docking_station.empty?(stored_bikes)).to eq false
+  #   end
+  # end
+end 
