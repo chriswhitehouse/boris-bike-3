@@ -4,10 +4,13 @@ describe DockingStation do
 
   let(:docking_station) {described_class.new}
   let(:bike) {Bike.new}
-  let(:bike2) {Bike.new}
 
   it 'responds to bike method' do
-    is_expected.to respond_to(:bike)
+    is_expected.to respond_to(:stored_bikes)
+  end
+
+  it 'returns an empty array for stored_bikes whne initialized' do
+    expect(docking_station.stored_bikes).to eq []
   end
 
   describe '#release_bike' do
@@ -16,7 +19,7 @@ describe DockingStation do
     end
 
     it 'gets a bike' do
-      docking_station.dock_bike(bike)
+      docking_station.dock(bike)
       expect(docking_station.release_bike).to be_instance_of Bike #cannot use subject here for
     end
 
@@ -27,21 +30,20 @@ describe DockingStation do
 
   describe '#dock_bike' do
     it 'responds to the dock_bike method with one argument' do
-      is_expected.to respond_to(:dock_bike).with(1).argument
+      is_expected.to respond_to(:dock).with(1).argument
     end
 
     it 'accepts a bike object' do
-      expect(docking_station.dock_bike(bike)).to be_instance_of Bike
+      expect(docking_station.dock(bike)).to be_instance_of Bike
     end
 
     it 'allows user to see bike' do
-      docking_station.dock_bike(bike)
-      expect(docking_station.bike).to eq bike
+      docking_station.dock(bike)
+      expect(docking_station.stored_bikes).to eq [bike]
     end
 
-    it 'gives an error when a bike is already docked' do
-      docking_station.dock_bike(bike)
-      expect { docking_station.dock_bike(bike2) }.to raise_error "Docking Station Full"
+    it 'gives an error when a user tries to dock a bike when the docking station already contains 20 bikes' do
+      expect { 21.times { docking_station.dock(Bike.new) } }.to raise_error "Docking Station Full"
     end
   end
 

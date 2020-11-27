@@ -1,17 +1,22 @@
 require './lib/bike.rb'
 
 class DockingStation
-  attr_reader :bike
+  attr_reader :stored_bikes
 
-  def release_bike
-    raise StandardError.new "no bikes left" unless @bike
-    #alternatively fail "no bikes available" ...
-    @bike
+  def initialize
+    @stored_bikes = []
   end
 
-  def dock_bike(bike)
-    raise StandardError.new "Docking Station Full" unless @bike.nil? == true
-    @bike = bike
+  def release_bike
+    raise StandardError.new "no bikes left" unless @stored_bikes.empty? == false
+    #alternatively fail "no bikes available" ...
+    @stored_bikes.pop
+  end
+
+  def dock(bike)
+    raise StandardError.new "Docking Station Full" unless @stored_bikes.count < 20
+    @stored_bikes << bike
+    @stored_bikes[0]
   end
 
 end
